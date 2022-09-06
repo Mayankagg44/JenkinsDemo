@@ -10,7 +10,7 @@ pipeline {
 
         booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
 
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        choice(name: 'CHOICE', choices: ['Start', 'Stop'], description: 'Pick something')
 
     }
     stages {
@@ -28,7 +28,7 @@ pipeline {
         stage('Python Script') {
             steps {
                 withCredentials([aws(credentialsId: "760451896171", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh 'python3 script.py'
+                    sh 'python3 script.py ${CHOICE}'
             }
         }
     }
