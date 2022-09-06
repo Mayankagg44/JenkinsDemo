@@ -12,7 +12,7 @@ def status_rds():
 
     for i in response['DBInstances']:
         if status.lower() =='start':
-            if i['DBInstanceStatus'] == 'Available' or i['DBInstanceStatus'] == 'starting':
+            if i['DBInstanceStatus'] == 'available' or i['DBInstanceStatus'] == 'starting':
                 print("Already start")
                 sys.exit(1)
             else:
