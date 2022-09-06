@@ -24,6 +24,6 @@ def status_rds():
                 sys.exit(1)
             else:
                 client.stop_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
-                print('starting DB instance {0}'.format(i['DBInstanceIdentifier']))
+                print('stopping DB instance {0}'.format(i['DBInstanceIdentifier']))
 
 status_rds()
