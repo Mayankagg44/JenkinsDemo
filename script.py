@@ -11,14 +11,14 @@ def status_rds():
     print(response)
 
     for i in response['DBInstances']:
-        if status =='start':
+        if status.lower() =='start':
             if i['DBInstanceStatus'] == 'Available' or i['DBInstanceStatus'] == 'starting':
                 print("Already start")
                 sys.exit(1)
             else:
                 client.start_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
                 print('starting DB instance {0}'.format(i['DBInstanceIdentifier']))          
-        if status =='stop':
+        if status.lower() =='stop':
             if i['DBInstanceStatus'] == 'stopped' or i['DBInstanceStatus'] == 'stopping':
                 print("Already stopped")
                 sys.exit(1)
