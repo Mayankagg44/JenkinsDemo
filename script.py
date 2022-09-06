@@ -1,5 +1,7 @@
 import boto3
+import sys
 
+status = sys.argv[1]
 #Describe RDS
 def status_rds():
     client = boto3.client('rds')
@@ -9,15 +11,19 @@ def status_rds():
     print(response)
 
     for i in response['DBInstances']:
-        if i['DBInstanceStatus'] == 'Available':
-            client.stop_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
-            print('stopping DB instance {0}'.format(i['DBInstanceIdentifier']))
-        elif i['DBInstanceStatus'] == 'stopped':
-            client.start_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
-            print('starting DB instance {0}'.format(i['DBInstanceIdentifier']))
-        elif i['DBInstanceStatus']=='starting':
-            print('DB Instance {0} is in starting state. Please stop the cluster after starting is complete'.format(i['DBInstanceIdentifier']))
-        elif i['DBInstanceStatus']=='stopping':
-            print('DB Instance {0} is already in stopping state.'.format(i['DBInstanceIdentifier']))
+        if status =='start':
+            if i['DBInstanceStatus'] == 'Available' or i['DBInstanceStatus'] == 'starting':
+                print("Already start")
+                sys.exit(1)
+            else:
+                client.start_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
+                print('starting DB instance {0}'.format(i['DBInstanceIdentifier']))          
+        if status =='stop':
+            if i['DBInstanceStatus'] == 'stopped' or i['DBInstanceStatus'] == 'stopping':
+                print("Already stopped")
+                sys.exit(1)
+            else:
+                client.start_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
+                print('starting DB instance {0}'.format(i['DBInstanceIdentifier']))
 
 status_rds()
