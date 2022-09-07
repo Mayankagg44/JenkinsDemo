@@ -7,7 +7,7 @@ pipeline {
         cron('58 10 * * *')
     }
     parameters {
-        string(name: 'NAME', defaultValue: 'database-1', description: 'What is the name of the database?')
+        string(name: 'NAME', defaultValue: 'database-1,database-2', description: 'What is the name of the database?')
     }
     stages {
         stage('Example') {
