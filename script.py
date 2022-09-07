@@ -22,6 +22,8 @@ def status_rds():
             if i['DBInstanceStatus'] == 'stopped' or i['DBInstanceStatus'] == 'stopping':
                 print("Already stopped")
                 sys.exit(1)
+            elif i['DBInstanceStatus'] == 'starting':
+                print('The DB instance {0} is in starting mode...Kindly wait for few mins'.format(i['DBInstanceIdentifier']))
             else:
                 client.stop_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
                 print('stopping DB instance {0}'.format(i['DBInstanceIdentifier']))
