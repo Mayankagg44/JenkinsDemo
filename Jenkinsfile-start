@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    triggers {
+        cron('0 7 * * *')
+    }
     parameters {
         string(name: 'PERSON', defaultValue: 'Human', description: 'Who should I say hello to?')
 
@@ -8,7 +10,7 @@ pipeline {
 
         booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
 
-        choice(name: 'CHOICE', choices: ['Start', 'Stop'], description: 'Pick something')
+        //choice(name: 'CHOICE', choices: ['Start', 'Stop'], description: 'Pick something')
 
     }
     stages {
@@ -20,13 +22,13 @@ pipeline {
 
                 echo "Toggle: ${params.TOGGLE}"
 
-                echo "Choice: ${params.CHOICE}"
+               // echo "Choice: ${params.CHOICE}"
             }
         }
         stage('Python Script') {
             steps {
                 withCredentials([aws(credentialsId: "760451896171", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh 'python3 script.py ${CHOICE}'
+                    sh 'python3 script.py start'
                 }
             }
         }
