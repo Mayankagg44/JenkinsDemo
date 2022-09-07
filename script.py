@@ -33,4 +33,6 @@ def status_rds():
                     client.stop_db_instance(DBInstanceIdentifier = i['DBInstanceIdentifier'])
                     print('stopping DB instance {0}'.format(i['DBInstanceIdentifier']))
 
-status_rds()
+if __name__ == '__main__':
+    status_rds()
+    
