@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo "Database is: ${params.NAME}"
+                echo "Database is: ${NAME}"
             }
         }
         stage('Python Script') {
