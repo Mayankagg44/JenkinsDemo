@@ -1,12 +1,14 @@
 import boto3
 import sys
+import os
 
 status = sys.argv[1]
+
 #Describe RDS
 def status_rds():
     client = boto3.client('rds')
     response = client.describe_db_instances(
-        DBInstanceIdentifier='database-1'
+        DBInstanceIdentifier = os.environ['NAME']
     )
     print(response)
 
