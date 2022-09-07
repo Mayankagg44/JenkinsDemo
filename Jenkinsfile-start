@@ -8,19 +8,11 @@ pipeline {
     }
     parameters {
         string(name: 'NAME', defaultValue: 'database-1', description: 'What is the name of the database?')
-
-        //text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-
-        //booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
     }
     stages {
         stage('Example') {
             steps {
                 echo "Database is: ${params.NAME}"
-
-                //echo "Biography: ${params.BIOGRAPHY}"
-
-                //echo "Toggle: ${params.TOGGLE}"
             }
         }
         stage('Python Script') {
