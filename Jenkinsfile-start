@@ -16,7 +16,7 @@ pipeline {
         stage('Python Script') {
             steps {
                 withCredentials([aws(credentialsId: "760451896171", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh 'python3 script.py start ${NAME}'
+                    sh 'python3 script.py start ${INST_NAME}'
                     sh 'python3 cluster-boto3.py start ${CLUSTER_NAME}'
                 }
             }
