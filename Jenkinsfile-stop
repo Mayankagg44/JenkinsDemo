@@ -11,14 +11,14 @@ pipeline {
         stage('Example') {
             steps {
                 echo "Database Instance is: ${INST_NAME}"
-                echo "Database Cluster is: ${CLUSTER_NAME}"
+                //echo "Database Cluster is: ${CLUSTER_NAME}"
             }
         }
         stage('Python Script') {
             steps {
                 withCredentials([aws(credentialsId: "760451896171", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh 'python3 script.py stop ${INST_NAME}'
-                    sh 'python3 cluster-boto3.py stop ${CLUSTER_NAME}'
+                    //sh 'python3 cluster-boto3.py stop ${CLUSTER_NAME}'
                 }
             }
         }
