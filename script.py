@@ -11,6 +11,7 @@ def status_rds():
         response = client.describe_db_instances(
             DBInstanceIdentifier=db
         )
+        print(response)
         for i in response['DBInstances']:
             if status.lower() =='start':
                 if i['DBInstanceStatus'] == 'available' or i['DBInstanceStatus'] == 'starting':
