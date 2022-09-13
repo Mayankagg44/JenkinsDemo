@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Python Script') {
             when{
-                environment name: 'NAME', value: 'database-1' 
+                environment name: 'NAME', value: 'database-2' 
                 }
             steps {
                 withCredentials([aws(credentialsId: "760451896171", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
